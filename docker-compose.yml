@@ -1,0 +1,33 @@
+version: '3.3'
+services:
+  php-apache:
+    image: webdevops/php-apache
+    volumes:
+      - '/home/nahid/www/fastbazzar.loc:/app'
+    networks:
+      testing_net:
+        ipv4_address: 172.19.0.2
+    environment:
+      - php.session.gc_maxlifetime=31536000
+      - php.session.cookie_lifetime=31536000
+      - php.memory_limit=2048M
+  phpmyadmin:
+    image: 'phpmyadmin/phpmyadmin:latest'
+    environment:
+      - PMA_HOST=172.19.0.4
+      - PMA_USER=nahid
+      - PMA_PASSWORD=j
+    networks:
+      testing_net:
+        ipv4_address: 172.19.0.3
+  mysql-server:
+    image: mysql/mysql-server
+    networks:
+      testing_net:
+        ipv4_address: 172.19.0.4
+networks:
+  testing_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.19.0.0/16
