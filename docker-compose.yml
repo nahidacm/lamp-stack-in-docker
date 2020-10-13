@@ -11,6 +11,7 @@ services:
       - php.session.gc_maxlifetime=31536000
       - php.session.cookie_lifetime=31536000
       - php.memory_limit=2048M
+      - PHP_DISPLAY_ERRORS=1
   phpmyadmin:
     image: 'phpmyadmin/phpmyadmin:latest'
     environment:
