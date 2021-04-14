@@ -1,34 +1,39 @@
 version: '3.3'
 services:
   php-apache:
-    image: nahidacm/apache-magento2.3.5
+    image: 'webdevops/php-apache:7.4'
     volumes:
-      - '/app/path/in/host/pc:/app'
+      - './:/app'
     networks:
-      testing_net:
-        ipv4_address: 172.19.0.2
+      - app-network
+    ports:
+      - "801:80"
     environment:
       - php.session.gc_maxlifetime=31536000
       - php.session.cookie_lifetime=31536000
       - php.memory_limit=2048M
       - PHP_DISPLAY_ERRORS=1
-  phpmyadmin:
-    image: 'nahidacm/phpmyadmin:latest'
+  mysql:
+    image: mysql
     environment:
-      - PMA_HOST=172.19.0.4
-      - PMA_USER=nahid
-      - PMA_PASSWORD=j
+      - MYSQL_ROOT_PASSWORD=mypass
+    volumes:
+      - ./dockre-compose/mysql:/docker-entrypoint-initdb.d
+      - ./dockre-compose/dbdata:/var/lib/mysql
     networks:
-      testing_net:
-        ipv4_address: 172.19.0.3
-  mysql-server:
-    image: nahidacm/mysql-server
+      - app-network
+  phpmyadmin:
+    image: 'phpmyadmin/phpmyadmin:latest'
+    depends_on:
+      - mysql
+    environment:
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=mypass
     networks:
-      testing_net:
-        ipv4_address: 172.19.0.4
+      - app-network
+    ports:
+      - "802:80"
 networks:
-  testing_net:
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.19.0.0/16
+  app-network:
+    driver: bridge
