@@ -1,5 +1,6 @@
 # lamp-stack-in-docker with PhpMyAdmin 
 LAMP stack in docker. which just works. Simple and clean docker composer file.
+
 It icludes: PHP 7.4, MySql latest, PhpMyAdmin Latest, 
 
 ## How to Use?
