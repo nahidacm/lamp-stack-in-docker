@@ -1,11 +1,12 @@
-# lamp-stack-in-docker
+# lamp-stack-in-docker with PhpMyAdmin 
 LAMP stack in docker. which just works. Simple and clean docker composer file.
+It icludes: PHP 7.4, MySql latest, PhpMyAdmin Latest, 
 
-## To make it work in your local machine:
+## How to Use?
  
-Just update line: 6, replace `/app/path/in/host/pc` with your application directory
-
-I assumed your local IP `172.19.0.0` is available.
-
-In case if this is availed, just change `19`'s to another number which is available ( that must be greater than 1 and less than 255).
+1. Place this `docker-compose.yml` file in project root.
+2. Run `docker-compose up -d`
+3. Access your web app in http://localhost:801
+4. Access PhpMyAdmin in http://localhost:802
+5. MySql user: `root` , password: `mypass` , port: `803`
 
