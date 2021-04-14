@@ -22,6 +22,8 @@ services:
       - ./dockre-compose/dbdata:/var/lib/mysql
     networks:
       - app-network
+    ports:
+      - "803:3306"
   phpmyadmin:
     image: 'phpmyadmin/phpmyadmin:latest'
     depends_on:
