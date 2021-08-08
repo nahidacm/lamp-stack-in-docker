@@ -32,10 +32,13 @@ services:
       - PMA_HOST=mysql
       - PMA_USER=root
       - PMA_PASSWORD=mypass
+      - UPLOAD_LIMIT=300M
     networks:
       - app-network
     ports:
       - "802:80"
+    volumes:
+      - ./docker-compose/phpmyadmin/sessions:/sessions
 networks:
   app-network:
     driver: bridge
