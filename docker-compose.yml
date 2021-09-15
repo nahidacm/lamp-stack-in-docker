@@ -18,7 +18,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=mypass
     volumes:
-      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+      - ./docker-compose/mysql/conf.d:/etc/mysql/conf.d      
       - ./docker-compose/dbdata:/var/lib/mysql
     networks:
       - app-network
